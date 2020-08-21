@@ -1,18 +1,14 @@
 export const messages = {
     welcome: 'Welcome to Stackoverflow',
-    notFound: 'Wrong request. Route does not exist',
     serverError: 'Internal server error',
     redisConnected: 'redis client connected',
-    redisConnectionError: 'there was an error connecting to redis client',
+    redisConnectionError: 'there was an error connecting to the redis client',
     connectedToDatabase: 'connected to the database',
-    failedToConnect: 'failed to connect to database',
-    notFound: 'not found',
+    failedToConnect: 'failed to connect to the database',
+    notFound: 'what you are looking for is currently not available',
     unAuthorized: 'Authentication failed',
     noToken: 'No token spplied',
     tokenError: 'Invalid token provided',
-    IncorrectLoginDetails: 'Email or Password is incorrect',
-    userAuthorized: 'You are now logged in',
-    unAuthorizedRoute: 'You do not have permission to this route',
     loggedIn: 'succesfully logged in',
     alreadyUpvoted: 'you already upvoted',
     notUpvoted: 'You are yet to upvote this question',
@@ -20,7 +16,7 @@ export const messages = {
     ok: 'Your request was successful',
     created: 'created successfully',
     askedQuestion: 'Question with similar title already exists',
-    usedEmail: (email) => `User with this email (${email}) already exist.`,
+    usedEmail: (email) => `User with this email (${email}) already exists.`,
   };
   
   

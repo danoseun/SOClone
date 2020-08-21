@@ -6,7 +6,7 @@ import redis from 'redis';
 import { connect } from '../src/config'
 import { messages } from '../src/utils/message';
 import {
-    userRouter, questionRouter
+    userRouter, questionRouter, defaultRouter
   } from './routes';
 
 
@@ -39,13 +39,11 @@ const port = process.env.PORT || 1320;
 
 app.use('/api', userRouter);
 app.use('/api', questionRouter);
+app.use('/', defaultRouter);
 
 
 
-// entry point of the application
-app.get('*', (req, res) => res.status(200).send({
-   message: messages.welcome
-}));
+
 app.listen(port, () => {
    console.log(`Server is running on PORT ${port}`);
 });

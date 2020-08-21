@@ -65,11 +65,14 @@ export const userController = {
       perPage = perPage ? Number(perPage, 10) : 10;
       page = page ? Number(page, 10) : 1;
       username = username.trim();
-    
-      let result = await User.find({username:{'$regex' : `${username}`, '$options' : 'i'}}).select(['-password']).skip((page - 1) * perPage)
+      try {
+        let result = await User.find({username:{'$regex' : `${username}`, '$options' : 'i'}}).select(['-password']).skip((page - 1) * perPage)
       .limit(perPage)
       .sort({ date: -1 })
       .exec();
       result.length > 0 ? successResponseWithData(res, statusCodes.success, messages.ok, result) : successResponse(res, statusCodes.notFound, messages.notFound);
+      }catch(err){
+        errorResponse(res, statusCodes.serverError, error.message);
+      }
     }
 };

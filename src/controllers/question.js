@@ -42,7 +42,20 @@ export const questionController = {
      * @memeberof questionController object
      */
   async viewQuestions(req, res){
-      try{
+    let { page, perPage, title } = req.query;
+    perPage = perPage ? Number(perPage, 10) : 10;
+    page = page ? Number(page, 10) : 1;
+    
+      try {
+          if(title) {
+            title = title.trim();
+            let result = await Question.find({title:{'$regex' : `${title}`, '$options' : 'i'}}).skip((page - 1) * perPage)
+        .limit(perPage)
+        .sort({ date: -1 })
+        .exec();
+        result.length > 0 ? successResponseWithData(res, statusCodes.success, messages.ok, result) : successResponse(res, statusCodes.notFound, messages.notFound);
+        return;
+        }
         let questions = await Question.find().sort({ date: 'desc' });
         questions ? successResponseWithData(res, statusCodes.success, messages.ok, questions) : successResponse(res, statusCodes.notFound, messages.notFound);
       } catch(error){
@@ -133,7 +146,27 @@ export const questionController = {
         } catch(error){
             errorResponse(res, statusCodes.serverError, error.message);
         }
-    }
+    },
+
+    /**
+     * Search for Questions by title on the application
+     * @param {object} req - The request object
+     * @param {object} res - The response object
+     * @return {object} JSON object representing success
+     * @memeberof questionController object
+     */
+    async searchQuestions(req, res){
+        let { page, perPage, username } = req.query;
+        perPage = perPage ? Number(perPage, 10) : 10;
+        page = page ? Number(page, 10) : 1;
+        username = username.trim();
+      
+        let result = await Question.find({username:{'$regex' : `${title}`, '$options' : 'i'}}).skip((page - 1) * perPage)
+        .limit(perPage)
+        .sort({ date: -1 })
+        .exec();
+        result.length > 0 ? successResponseWithData(res, statusCodes.success, messages.ok, result) : successResponse(res, statusCodes.notFound, messages.notFound);
+      }
 };
 
 
