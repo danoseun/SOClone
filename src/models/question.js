@@ -26,13 +26,6 @@ const QuestionSchema = new Schema({
             ref: 'user'
         }
     }],
-
-    downvotes: [{
-        user: {
-            type: Schema.Types.ObjectId,
-            ref: 'user'
-        }
-    }],
     
     answers: [{
         user: {

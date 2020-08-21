@@ -68,8 +68,9 @@ export const userValidator = {
     }
 
     username = username.toLowerCase().trim();
+    let foundUser;
     try {
-      const foundUser = await User.findOne({ username });
+       foundUser = await User.findOne({ username });
 
       if (!foundUser) {
         errorResponse(res, statusCodes.unauthorized, messages.unAuthorized);
@@ -83,9 +84,8 @@ export const userValidator = {
         errorResponse(res, statusCodes.serverError, error.message);
     }
 
-    password = password.trim();
-    req.body.username = username;
-    req.body.password = password;
+    
+    req.body = foundUser;
     next();
   }
 };

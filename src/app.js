@@ -6,7 +6,7 @@ import redis from 'redis';
 import { connect } from '../src/config'
 import { messages } from '../src/utils/message';
 import {
-    userRouter
+    userRouter, questionRouter
   } from './routes';
 
 
@@ -38,6 +38,7 @@ const port = process.env.PORT || 1320;
 
 
 app.use('/api', userRouter);
+app.use('/api', questionRouter);
 
 
 

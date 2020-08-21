@@ -8,7 +8,6 @@ import { messages } from '../utils/message';
 export const userController = {
   /**
      * Create user account on the application
-     * @static
      * @param {object} req - The request object
      * @param {object} res - The response object
      * @return {object} JSON object representing success
@@ -39,7 +38,6 @@ export const userController = {
 
   /**
      * Log user in to the application
-     * @static
      * @param {object} req - The request object
      * @param {object} res - The response object
      * @return {object} JSON object representing success
@@ -53,5 +51,25 @@ export const userController = {
     } catch (error) {
         errorResponse(res, statusCodes.serverError, error.message);
     }
-  }
+  },
+
+  /**
+     * Search for users by username on the application
+     * @param {object} req - The request object
+     * @param {object} res - The response object
+     * @return {object} JSON object representing success
+     * @memeberof userController object
+     */
+    async searchUsers(req, res){
+      let { page, perPage, username } = req.query;
+      perPage = perPage ? Number(perPage, 10) : 10;
+      page = page ? Number(page, 10) : 1;
+      username = username.trim();
+    
+      let result = await User.find({username:{'$regex' : `${username}`, '$options' : 'i'}}).select(['-password']).skip((page - 1) * perPage)
+      .limit(perPage)
+      .sort({ date: -1 })
+      .exec();
+      result.length > 0 ? successResponseWithData(res, statusCodes.success, messages.ok, result) : successResponse(res, statusCodes.notFound, messages.notFound);
+    }
 };
