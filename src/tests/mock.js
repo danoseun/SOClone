@@ -9,7 +9,7 @@ const record = attributes => {
   let generatedRecord = {}
 
   attributes.forEach(attribute => generatedRecord = {...generatedRecord, [attribute]: dataFactory(attribute)})
-    console.log('ATT', attributes);
+
   return generatedRecord
 }
 

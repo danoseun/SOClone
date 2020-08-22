@@ -31,8 +31,10 @@ export const userController = {
     try {
       const result = await newUser.save();
       successResponseWithData(res, statusCodes.created, messages.created, result);
+      return;
     } catch (error) {
         errorResponse(res, statusCodes.serverError, error.message);
+        return;
     }
   },
 
@@ -48,6 +50,7 @@ export const userController = {
     try {
       const token = createToken(req.body);
       successResponseWithData(res, statusCodes.success, messages.loggedIn, token);
+      return;
     } catch (error) {
         errorResponse(res, statusCodes.serverError, error.message);
     }
@@ -64,14 +67,16 @@ export const userController = {
       let { page, perPage, username } = req.query;
       perPage = perPage ? Number(perPage, 10) : 10;
       page = page ? Number(page, 10) : 1;
-      username = username.trim();
+  
       try {
+        username = username.trim();
         let result = await User.find({username:{'$regex' : `${username}`, '$options' : 'i'}}).select(['-password']).skip((page - 1) * perPage)
       .limit(perPage)
       .sort({ date: -1 })
       .exec();
       result.length > 0 ? successResponseWithData(res, statusCodes.success, messages.ok, result) : successResponse(res, statusCodes.notFound, messages.notFound);
-      }catch(err){
+      return;
+      }catch(error){
         errorResponse(res, statusCodes.serverError, error.message);
       }
     }

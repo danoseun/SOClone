@@ -19,113 +19,32 @@ export const validRegisterData = [
   export const inValidRegisterData = [
     // undefined email 0
     {
-      first_name: 'John',
-      last_name: 'James',
-      password: 'jamespass',
-      address: 'jamespass'
+      firstname: 'John',
+      lastname: 'James',
+      password: 'password',
+      username: 'jamespass'
     },
   
-    // spaced email 1
+    // undefined username 1
     {
-      email: 'jja mes@gmail.com',
-      first_name: 'John',
-      last_name: 'James',
-      password: 'jamespass',
-      address: '12, joriondo street, Lagos'
+      firstname: 'John',
+      lastname: 'James',
+      email: 'jjames@gmail.com',
+      password: 'jamespass' 
     },
-  
-    // invalid email format 2
+
+    // Existing email 2
     {
-      email: 'jjamesgmail.com',
-      first_name: 'John',
-      last_name: 'James',
-      password: 'jamespass',
-      address: '23, rondle avenue, Lagos'
-    },
-    // Existing email 3
-    {
+      firstname: 'Ikenna',
+      lastname: 'James',
       email: 'iknagod@gmail.com',
-      first_name: 'John',
-      last_name: 'James',
-      password: 'jamespass',
-      address: '23, randle street, Lagos'
+      password: 'password',
+      username: 'iknagod'
     },
-  
-    // Firstname
-    // undefined firstname 4
-    {
-      email: 'babnla@gmail.com',
-      last_name: 'James',
-      password: 'jamespass',
-      address: '14 ketu street,Lagos'
-    },
-    // spaced firstname 5
-    {
-      email: 'donbabj@gmail.com',
-      first_name: 'Ike nna',
-      last_name: 'James',
-      password: 'jamespass',
-      address: '14 ketu street,Lagos'
-    },
-    // short firstname length 6
-    {
-      email: 'iknababa@gmail.com',
-      first_name: 'I',
-      last_name: 'James',
-      password: 'jamespass',
-      address: '14 ketu street,Lagos'
-    },
-  
-    // lastname
-    // undefined lastname 7
-    {
-      email: 'jekyll@gmail.com',
-      first_name: 'Ikenna',
-      password: 'jamespass',
-      address: '14 ketu street,Lagos'
-    },
-    // lastname space 8
-    {
-      email: 'jacintha@gmail.com',
-      first_name: 'Ikenna',
-      last_name: 'Jam es',
-      password: 'jamespass',
-      address: '14 ketu street,Lagos'
-    },
-  
-    // Password
-    // undefined password 9
-    {
-      email: 'iknagod@gmail.com',
-      first_name: 'Ikenna',
-      last_name: 'James',
-      address: '14 ketu street,Lagos'
-    },
-    // short password 10
-    {
-      email: 'seller@gmail.com',
-      first_name: 'Ikenna',
-      last_name: 'James',
-      password: 'js',
-      address: '14 ketu street,Lagos'
-    },
-    // address
-    // undefined address 11
-    {
-      email: 'iknagod@gmail.com',
-      first_name: 'Ikenna',
-      last_name: 'James',
-      password: 'Kembewoi'
-    }
   ];
   
   // Login
   export const inValidLoginData = [
-    // no email/empty email 0
-    {
-      password: 'jamiejesss'
-    },
-  
     // email not found in the db 1
     {
       email: 'jossyoloye@gmail.com',
@@ -135,10 +54,5 @@ export const validRegisterData = [
     // no password/empty password 2
     {
       email: 'iknagod@gmail.com'
-    },
-    // password not in db 3
-    {
-      email: 'iknagod@gmail.com',
-      password: 'lasiselenu'
     }
   ];

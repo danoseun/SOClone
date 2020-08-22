@@ -15,6 +15,8 @@ export const dataFactory = type => {
       return faker.name.firstName()
     case 'lastName':
       return faker.name.lastName()
+    case 'username':
+      return faker.name.firstName()
     case 'password':
       return password
     default:

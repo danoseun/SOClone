@@ -30,8 +30,9 @@ export const userValidator = {
 
     if (validation.fails()) {
         errorResponse(res, statusCodes.badRequest, validation.errors.errors);
+        return;
     }
-    email = email.toLowerCase().trim();
+    //email = email.toLowerCase().trim();
     try {
       const userEmail = await User.findOne({ email });
       if (userEmail) {
@@ -65,6 +66,7 @@ export const userValidator = {
 
     if (validation.fails()) {
         errorResponse(res, statusCodes.badRequest, validation.errors.errors);
+        return;
     }
 
     username = username.toLowerCase().trim();
