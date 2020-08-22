@@ -33,8 +33,8 @@ export const userController = {
       successResponseWithData(res, statusCodes.created, messages.created, result);
       return;
     } catch (error) {
-        errorResponse(res, statusCodes.serverError, error.message);
-        return;
+      errorResponse(res, statusCodes.serverError, error.message);
+      return;
     }
   },
 
@@ -52,7 +52,8 @@ export const userController = {
       successResponseWithData(res, statusCodes.success, messages.loggedIn, token);
       return;
     } catch (error) {
-        errorResponse(res, statusCodes.serverError, error.message);
+      errorResponse(res, statusCodes.serverError, error.message);
+      return;
     }
   },
 

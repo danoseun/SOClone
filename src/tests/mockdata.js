@@ -56,3 +56,38 @@ export const validRegisterData = [
       email: 'iknagod@gmail.com'
     }
   ];
+
+
+  // Questions
+  export const validQuestionData = [
+    {
+      title: 'simple question',
+      text: 'why is my code not working?'
+    },
+    {
+      title: 'another question',
+      text: 'what is the difference between let and const?'
+    }
+  ];
+
+
+  export const inValidQuestionData = [
+    {
+      text: 'why is my code not working?'
+    },
+    {
+      title: 'another question'
+    }
+  ];
+
+  export const answerData = [
+    {
+      text: 'taht question is ambiguous but welcome to stackoverflow'
+    },
+    {
+      text: 'let is used to declare variables that can change while const is used to declare variables that can not change'
+    },
+    {
+      text: ''
+    }
+  ];

@@ -27,6 +27,7 @@ export const questionValidator = {
 
     if (validation.fails()) {
         errorResponse(res, statusCodes.badRequest, validation.errors.errors);
+        return;
     }
     title = title.trim();
     try {

@@ -60,6 +60,7 @@ export const questionController = {
         questions ? successResponseWithData(res, statusCodes.success, messages.ok, questions) : successResponse(res, statusCodes.notFound, messages.notFound);
       } catch(error){
         errorResponse(res, statusCodes.serverError, error.message);
+        return;
       }   
   },
 
@@ -76,6 +77,7 @@ export const questionController = {
           question = await getQuestionById(req.params.id);
           if(!question){
             successResponse(res, statusCodes.notFound, messages.notFound);
+            return;
           }
           const newAnswer = {
             user: req.authData.payload._id,
@@ -84,9 +86,11 @@ export const questionController = {
         };
         question.answers.unshift(newAnswer);
         question = await question.save();
-        successResponseWithData(res, statusCodes.success, messages.ok, question);
+        successResponseWithData(res, statusCodes.created, messages.ok, question);
+        return;
       } catch(error){
         errorResponse(res, statusCodes.serverError, error.message);
+        return;
       }
   },
   
@@ -111,7 +115,7 @@ export const questionController = {
                 }
                 question.upvotes.unshift({ user: req.authData.payload._id });
                 await question.save();
-                successResponseWithData(res, statusCodes.success, messages.ok, question);
+                successResponseWithData(res, statusCodes.created, messages.ok, question);
                 return;
             }
         } catch(error){
