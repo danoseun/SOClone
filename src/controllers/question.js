@@ -1,4 +1,5 @@
 import { Question } from '../models';
+import { pusher } from '../config/pusher';
 import { errorResponse, successResponse, successResponseWithData } from '../utils/response';
 import { statusCodes } from '../utils/statuscode';
 import { messages } from '../utils/message';
@@ -86,6 +87,8 @@ export const questionController = {
         };
         question.answers.unshift(newAnswer);
         question = await question.save();
+        const message = `${newAnswer.name} just answered your question`
+        pusher.trigger('stackoverflow-notifications', `notify-${question.user}`, { message });
         successResponseWithData(res, statusCodes.created, messages.ok, question);
         return;
       } catch(error){
@@ -107,6 +110,7 @@ export const questionController = {
             question = await getQuestionById(req.params.id);
             if(!question){
                 successResponse(res, statusCodes.notFound, messages.notFound);
+                return;
             }
             else {
                 if(question.upvotes.some(vote => vote.user.toString() === req.authData.payload._id)){
@@ -120,6 +124,7 @@ export const questionController = {
             }
         } catch(error){
             errorResponse(res, statusCodes.serverError, error.message);
+            return;
           }
     },
 
@@ -136,6 +141,7 @@ export const questionController = {
             question = await getQuestionById(req.params.id);
             if(!question){
                 successResponse(res, statusCodes.notFound, messages.notFound);
+                return;
             }
             else {
                 if(!question.upvotes.some(vote => vote.user.toString() === req.authData.payload._id)){
@@ -149,6 +155,7 @@ export const questionController = {
             }
         } catch(error){
             errorResponse(res, statusCodes.serverError, error.message);
+            return;
         }
     },
 
@@ -170,6 +177,7 @@ export const questionController = {
         .sort({ date: -1 })
         .exec();
         result.length > 0 ? successResponseWithData(res, statusCodes.success, messages.ok, result) : successResponse(res, statusCodes.notFound, messages.notFound);
+        return;
       }
 };
 
